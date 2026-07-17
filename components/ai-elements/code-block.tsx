@@ -391,14 +391,13 @@ export const CodeBlockContent = ({
 
   // Async highlighting result (populated after shiki loads)
   const [asyncTokens, setAsyncTokens] = useState<TokenizedCode | null>(null);
-  const asyncKeyRef = useRef({ code, language });
+  const [asyncKey, setAsyncKey] = useState({ code, language });
 
-  // Invalidate stale async tokens synchronously during render
-  if (
-    asyncKeyRef.current.code !== code ||
-    asyncKeyRef.current.language !== language
-  ) {
-    asyncKeyRef.current = { code, language };
+  // Invalidate stale async tokens synchronously during render (setState
+  // during render is the supported way to reset derived state on a prop
+  // change, unlike mutating a ref's `.current` here).
+  if (asyncKey.code !== code || asyncKey.language !== language) {
+    setAsyncKey({ code, language });
     setAsyncTokens(null);
   }
 
