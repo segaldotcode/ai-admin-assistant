@@ -75,6 +75,19 @@ export async function getPaymentById(id: string): Promise<Payment | null> {
   return mapRow(data);
 }
 
+// Most recent failed or refunded payments, for the "needs attention" list
+// where an admin can ask Steven to explain what happened.
+export async function getRecentProblemPayments(limit = 5): Promise<Payment[]> {
+  const [failed, refunded] = await Promise.all([
+    searchPayments({ status: "failed" }, limit),
+    searchPayments({ status: "refunded" }, limit),
+  ]);
+
+  return [...failed, ...refunded]
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, limit);
+}
+
 export interface DailyPaymentStats {
   paymentsProcessed: number;
   refundsInitiated: number;

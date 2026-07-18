@@ -1,0 +1,27 @@
+{
+  "title": "Assistant Admin IA",
+  "subtitle": "Steven lit les vraies données d'audit et de paiement pour répondre à tes questions, pas un simple habillage de chat.",
+  "summary": {
+    "heading": "Aujourd'hui",
+    "paymentsProcessed": "paiements traités",
+    "refundsInitiated": "remboursements initiés",
+    "paymentsFailed": "paiements échoués",
+    "suspiciousActivity": "activité suspecte"
+  },
+  "chat": {
+    "emptyTitle": "Demande ce que tu veux à Steven",
+    "emptyDescription": "Paiements, événements d'audit, activité suspecte : tout est basé sur de vraies données.",
+    "placeholder": "Écris à Steven...",
+    "suggestions": [
+      "Résume l'activité d'aujourd'hui",
+      "Montre-moi les paiements échoués cette semaine",
+      "Y a-t-il eu de l'activité de connexion suspecte récemment ?"
+    ]
+  },
+  "explain": {
+    "heading": "À surveiller",
+    "button": "Expliquer",
+    "loading": "Réflexion en cours...",
+    "empty": "Rien à signaler pour le moment."
+  }
+}

@@ -1,24 +1,29 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { DailySummary } from "@/lib/ai/daily-summary";
+import type { Dictionary } from "@/lib/i18n";
 
-export function DailySummaryCard({ summary }: { summary: DailySummary }) {
+export function DailySummaryCard({ summary, dict }: { summary: DailySummary; dict: Dictionary }) {
   const { stats, headline, highlights } = summary;
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Today</CardTitle>
+        <CardTitle className="font-heading">{dict.summary.heading}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex flex-wrap gap-2">
-          <Badge variant="secondary">{stats.paymentsProcessed} payments processed</Badge>
-          <Badge variant="secondary">{stats.refundsInitiated} refunds initiated</Badge>
+          <Badge variant="secondary">
+            {stats.paymentsProcessed} {dict.summary.paymentsProcessed}
+          </Badge>
+          <Badge variant="secondary">
+            {stats.refundsInitiated} {dict.summary.refundsInitiated}
+          </Badge>
           <Badge variant={stats.paymentsFailed > 0 ? "destructive" : "secondary"}>
-            {stats.paymentsFailed} payments failed
+            {stats.paymentsFailed} {dict.summary.paymentsFailed}
           </Badge>
           <Badge variant={stats.suspiciousActivity > 0 ? "destructive" : "secondary"}>
-            {stats.suspiciousActivity} suspicious activity
+            {stats.suspiciousActivity} {dict.summary.suspiciousActivity}
           </Badge>
         </div>
 

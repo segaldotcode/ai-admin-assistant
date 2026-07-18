@@ -1,0 +1,27 @@
+{
+  "title": "AI Admin Assistant",
+  "subtitle": "Steven reads real audit and payment data to answer questions, no generic chat wrapper.",
+  "summary": {
+    "heading": "Today",
+    "paymentsProcessed": "payments processed",
+    "refundsInitiated": "refunds initiated",
+    "paymentsFailed": "payments failed",
+    "suspiciousActivity": "suspicious activity"
+  },
+  "chat": {
+    "emptyTitle": "Ask Steven anything",
+    "emptyDescription": "Payments, audit events, suspicious activity: it's all backed by real data.",
+    "placeholder": "Message Steven...",
+    "suggestions": [
+      "Summarize today's activity",
+      "Show me this week's failed payments",
+      "Any suspicious login activity recently?"
+    ]
+  },
+  "explain": {
+    "heading": "Needs attention",
+    "button": "Explain",
+    "loading": "Thinking...",
+    "empty": "Nothing needs attention right now."
+  }
+}

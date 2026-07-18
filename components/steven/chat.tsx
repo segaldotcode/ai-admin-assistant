@@ -23,27 +23,28 @@ import {
   ToolOutput,
 } from "@/components/ai-elements/tool";
 import { ASSISTANT_NAME } from "@/lib/ai/model";
+import type { Dictionary, Locale } from "@/lib/i18n";
 import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
 import { SparklesIcon } from "lucide-react";
+import { useMemo } from "react";
 
-const STARTER_QUESTIONS = [
-  "Summarize today's activity",
-  "Show me this week's failed payments",
-  "Any suspicious login activity recently?",
-];
-
-export function StevenChat() {
-  const { messages, sendMessage, status } = useChat();
+export function StevenChat({ dict, locale }: { dict: Dictionary; locale: Locale }) {
+  const transport = useMemo(
+    () => new DefaultChatTransport({ api: "/api/chat", body: { locale } }),
+    [locale],
+  );
+  const { messages, sendMessage, status } = useChat({ transport });
 
   return (
-    <div className="flex h-[32rem] flex-col rounded-lg border">
+    <div className="flex h-128 flex-col rounded-lg border">
       <Conversation>
         <ConversationContent>
           {messages.length === 0 ? (
             <ConversationEmptyState
               icon={<SparklesIcon className="size-6" />}
-              title={`Ask ${ASSISTANT_NAME} anything`}
-              description="Payments, audit events, suspicious activity: it's all backed by real data."
+              title={dict.chat.emptyTitle}
+              description={dict.chat.emptyDescription}
             />
           ) : (
             messages.map((message) => (
@@ -89,9 +90,11 @@ export function StevenChat() {
       <div className="space-y-3 border-t p-3">
         {messages.length === 0 && (
           <Suggestions>
-            {STARTER_QUESTIONS.map((question) => (
+            {dict.chat.suggestions.map((question) => (
               <Suggestion
                 key={question}
+                data-cuelume-press
+                data-cuelume-release
                 onClick={() => sendMessage({ text: question })}
                 suggestion={question}
               />
@@ -111,10 +114,15 @@ export function StevenChat() {
           <PromptInputTextarea
             className="flex-1"
             disabled={status === "streaming" || status === "submitted"}
-            placeholder={`Message ${ASSISTANT_NAME}...`}
+            placeholder={dict.chat.placeholder}
             rows={1}
           />
-          <PromptInputSubmit status={status} />
+          <PromptInputSubmit
+            data-cuelume-press
+            data-cuelume-release
+            status={status}
+            aria-label={`Send message to ${ASSISTANT_NAME}`}
+          />
         </PromptInput>
       </div>
     </div>
