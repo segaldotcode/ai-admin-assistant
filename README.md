@@ -17,7 +17,7 @@ The core idea: ask a plain-language question about what happened in the system, 
 ## Tech stack
 
 - Next.js (App Router)
-- AI SDK + Vercel AI Gateway, routed to Anthropic Claude Haiku
+- AI SDK + Vercel AI Gateway, routed to OpenAI GPT-5.4 mini
 - ai-elements chat components (conversation, message, prompt input, tool calls)
 - Supabase (reads `audit_logs` and `payments`, `payments` schema owned by this repo)
 - Tailwind CSS + Shadcn UI
